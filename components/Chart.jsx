@@ -5,9 +5,13 @@ import { createChart } from "lightweight-charts";
 
 export default function Chart({ data }) {
   const ref = useRef(null);
+  const chartRef = useRef(null);
+  const seriesRef = useRef(null);
 
   useEffect(() => {
-    const chart = createChart(ref.current, {
+    if (!ref.current) return;
+
+    chartRef.current = createChart(ref.current, {
       layout: {
         background: { color: "#0b0e11" },
         textColor: "#d1d4dc",
@@ -16,12 +20,20 @@ export default function Chart({ data }) {
       height: 400,
     });
 
-    const candleSeries = chart.addCandlestickSeries();
+    seriesRef.current = chartRef.current.addCandlestickSeries();
 
-    candleSeries.setData(data);
+    return () => {
+      chartRef.current.remove();
+      chartRef.current = null;
+      seriesRef.current = null;
+    };
+  }, []);
 
-    return () => chart.remove();
+  useEffect(() => {
+    if (seriesRef.current) {
+      seriesRef.current.setData(data);
+    }
   }, [data]);
 
-  return <div ref={ref} />;
+  return <div ref={ref} role="img" aria-label="Candlestick chart" />;
 }
