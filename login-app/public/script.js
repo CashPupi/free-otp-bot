@@ -43,7 +43,11 @@ document.getElementById("auth-form").addEventListener("submit", async (e) => {
     } else {
       setMessage(data.error || "Something went wrong.", "error");
     }
-  } catch {
-    setMessage("Network error. Please try again.", "error");
+  } catch (err) {
+    if (err instanceof TypeError || err instanceof SyntaxError) {
+      setMessage("Unexpected response from server.", "error");
+    } else {
+      setMessage("Network error. Please try again.", "error");
+    }
   }
 });
