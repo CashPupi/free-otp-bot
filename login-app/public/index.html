@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login App</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0e11;
+      font-family: monospace;
+      color: #e0e0e0;
+    }
+
+    .card {
+      background: #161a1f;
+      border: 1px solid #2c3038;
+      border-radius: 8px;
+      padding: 32px;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    h1 { font-size: 1.4rem; text-align: center; color: #f0b90b; }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 8px;
+      background: #0b0e11;
+      border: 1px solid #2c3038;
+      border-radius: 4px;
+      color: #a0a0a0;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 0.9rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .tabs button.active {
+      background: #f0b90b;
+      color: #0b0e11;
+      border-color: #f0b90b;
+      font-weight: bold;
+    }
+
+    form { display: flex; flex-direction: column; gap: 12px; }
+
+    input {
+      padding: 10px 12px;
+      background: #0b0e11;
+      border: 1px solid #2c3038;
+      border-radius: 4px;
+      color: #e0e0e0;
+      font-family: monospace;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus { border-color: #f0b90b; }
+
+    button[type="submit"] {
+      padding: 10px;
+      background: #f0b90b;
+      color: #0b0e11;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    button[type="submit"]:hover { opacity: 0.85; }
+
+    #message {
+      text-align: center;
+      font-size: 0.9rem;
+      min-height: 1.2em;
+    }
+
+    #message.error { color: #f6465d; }
+    #message.success { color: #0ecb81; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🔐 Login App</h1>
+
+    <div class="tabs">
+      <button id="tab-login" class="active" onclick="switchTab('login')">Login</button>
+      <button id="tab-register" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <form id="auth-form">
+      <input id="username" type="text" placeholder="Username" autocomplete="username" required />
+      <input id="password" type="password" placeholder="Password" autocomplete="current-password" required />
+      <button type="submit" id="submit-btn">Login</button>
+    </form>
+
+    <p id="message"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
